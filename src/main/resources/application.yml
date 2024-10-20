@@ -1,0 +1,23 @@
+server:
+  port: 8090
+  servlet:
+    context-path: "/stockhub-api"
+  error:
+    include-stacktrace: never
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/stockhub
+    username: fuzirex
+    password: admfuzi1122
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+app:
+  auth:
+    token-secret: DIWjjn8kcg1tdn9aEjGglY4IfnJ9kLkFgaFu8DFEIPGbMbv8hehjqlD-j6mO2FGksB0Phnmo7Bz7clFcfvYuVw
+    issuer: StockHub API
