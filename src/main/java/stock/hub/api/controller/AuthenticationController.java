@@ -10,26 +10,35 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import stock.hub.api.model.dto.LoginDTO;
-import stock.hub.api.model.dto.TokenJwtDTO;
+import stock.hub.api.configuration.logs.LogExecutionTime;
+import stock.hub.api.model.dto.request.LoginRequestDTO;
+import stock.hub.api.model.dto.response.LoginResponseDTO;
 import stock.hub.api.model.entity.Dealer;
+import stock.hub.api.model.exception.StockHubException;
+import stock.hub.api.model.type.ExceptionType;
+import stock.hub.api.service.DealerService;
 import stock.hub.api.service.TokenService;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/authentication")
-public class AuthenticationController {
+public class AuthenticationController extends BaseController {
 
     private final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
+    private final DealerService dealerService;
 
+    @LogExecutionTime
     @PostMapping("/login")
-    public ResponseEntity<TokenJwtDTO> login(@RequestBody @Valid LoginDTO dto) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(dto.getLogin(), dto.getPassword()));
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid LoginRequestDTO dto) {
+        if (!dealerService.existsByCNPJ(dto.getCnpj()))
+            throw new StockHubException(ExceptionType.INVALID_USER_OR_PASSWORD);
+
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(dto.getCnpj(), dto.getPassword()));
 
         String tokenJwt = tokenService.generateToken((Dealer) authentication.getPrincipal());
 
-        return ResponseEntity.ok(new TokenJwtDTO(tokenJwt));
+        return ok(new LoginResponseDTO(tokenJwt));
     }
 
 }

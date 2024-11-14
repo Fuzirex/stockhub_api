@@ -18,6 +18,12 @@ spring:
         format_sql: true
 
 app:
+  security:
+    cors:
+      headers: Authorization,Accept,Cache-Control,Connection,Content-Type,Expires,Origin,Pragma,Referer,Accept-Language,Access-Control-Allow-Origin
+      methods: OPTIONS,GET,POST,PUT,DELETE
+      origins: http://localhost:4200,http://localhost:9000
+
   auth:
     token-secret: DIWjjn8kcg1tdn9aEjGglY4IfnJ9kLkFgaFu8DFEIPGbMbv8hehjqlD-j6mO2FGksB0Phnmo7Bz7clFcfvYuVw
     issuer: StockHub API
