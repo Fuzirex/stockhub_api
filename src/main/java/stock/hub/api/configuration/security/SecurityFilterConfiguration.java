@@ -1,4 +1,4 @@
-package stock.hub.api.configuration;
+package stock.hub.api.configuration.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
