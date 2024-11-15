@@ -25,7 +25,7 @@ public class DealerController extends BaseController {
 
     @LogExecutionTime
     @GetMapping("/{cnpj}")
-    public ResponseEntity<DealerResponseDTO> login(@PathVariable String cnpj) {
+    public ResponseEntity<DealerResponseDTO> getDealerByCNPJ(@PathVariable String cnpj) {
         return ok(dealerService.getDealerByCNPJ(cnpj));
     }
 
