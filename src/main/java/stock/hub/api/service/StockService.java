@@ -1,6 +1,7 @@
 package stock.hub.api.service;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -18,11 +19,11 @@ public class StockService {
     public Page<StockResponseDTO> findDealerStock(StockRequestDTO dto) {
         return stockRepository.findDealerStockByFilter(
                 dto.getDealerCNPJ(),
-                dto.getProductType(),
-                dto.getModel(),
-                dto.getItemCode(),
-                dto.getCommercialSeries(),
-                dto.getChassisNumber(),
+                StringUtils.defaultIfBlank(dto.getProductType(), null),
+                StringUtils.defaultIfBlank(dto.getModel(), null),
+                StringUtils.defaultIfBlank(dto.getItemCode(), null),
+                StringUtils.defaultIfBlank(dto.getCommercialSeries(), null),
+                StringUtils.defaultIfBlank(dto.getChassisNumber(), null),
                 PageRequest.of(dto.getPage(), dto.getSize(), Sort.by("chassisNumber")));
     }
 }
