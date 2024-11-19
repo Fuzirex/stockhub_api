@@ -3,6 +3,7 @@ package stock.hub.api.model.dto.response;
 import lombok.*;
 import stock.hub.api.model.type.InvoiceOperationType;
 import stock.hub.api.util.ObjectMapperUtils;
+import stock.hub.api.util.ProductTypeUtils;
 
 import java.time.LocalDateTime;
 
@@ -22,7 +23,7 @@ public class InvoiceHistoryResponseDTO {
     private LocalDateTime emissionDate;
 
     //Product
-    private String productType;
+    private ProductTypeResponseDTO productType;
     private String model;
     private String itemCode;
     private String commercialSeries;
@@ -30,7 +31,8 @@ public class InvoiceHistoryResponseDTO {
 
     public InvoiceHistoryResponseDTO(final String dealerCNPJ, final String invoiceNumber, final String invoiceSeries,
                                      final InvoiceOperationType operationType, final LocalDateTime emissionDate, final String chassisNumber,
-                                     final String commercialSeries, final String itemCode, final String model, final String productType) {
+                                     final String commercialSeries, final String itemCode, final String model,
+                                     final String productType, String productTypeTranslationPT, String productTypeTranslationEN, String productTypeTranslationES) {
         this.dealerCNPJ = dealerCNPJ;
         this.invoiceNumber = invoiceNumber;
         this.invoiceSeries = invoiceSeries;
@@ -41,7 +43,11 @@ public class InvoiceHistoryResponseDTO {
         this.commercialSeries = commercialSeries;
         this.itemCode = itemCode;
         this.model = model;
-        this.productType = productType;
+
+        this.productType = ProductTypeResponseDTO.builder()
+                .id(productType)
+                .description(ProductTypeUtils.getProductTypeTranslation(productTypeTranslationPT, productTypeTranslationEN, productTypeTranslationES))
+                .build();
     }
 
     @Override

@@ -1,9 +1,9 @@
 package stock.hub.api.model.dto.response;
 
 import lombok.*;
-import org.springframework.context.i18n.LocaleContextHolder;
 import stock.hub.api.model.type.StockStatusType;
 import stock.hub.api.util.ObjectMapperUtils;
+import stock.hub.api.util.ProductTypeUtils;
 
 @Getter
 @Setter
@@ -30,19 +30,8 @@ public class StockResponseDTO {
 
         this.productType = ProductTypeResponseDTO.builder()
                 .id(productType)
-                .description(getProductTypeTranslation(productTypeTranslationPT, productTypeTranslationEN, productTypeTranslationES))
+                .description(ProductTypeUtils.getProductTypeTranslation(productTypeTranslationPT, productTypeTranslationEN, productTypeTranslationES))
                 .build();
-    }
-
-    private String getProductTypeTranslation(String productTypeTranslationPT, String productTypeTranslationEN, String productTypeTranslationES) {
-        String lang = LocaleContextHolder.getLocale().getLanguage();
-
-        return switch (lang) {
-            case "pt" -> productTypeTranslationPT;
-            case "en" -> productTypeTranslationEN;
-            case "es" -> productTypeTranslationES;
-            default -> null;
-        };
     }
 
     @Override

@@ -41,7 +41,7 @@ public enum StockStatusType {
 
         @PostConstruct
         public void postConstruct() {
-            EnumSet.allOf(ExceptionType.class).forEach(type -> type.setMessageSource(messageSource));
+            EnumSet.allOf(StockStatusType.class).forEach(type -> type.setMessageSource(messageSource));
         }
     }
 

@@ -42,7 +42,7 @@ public enum InvoiceOperationType {
 
         @PostConstruct
         public void postConstruct() {
-            EnumSet.allOf(ExceptionType.class).forEach(type -> type.setMessageSource(messageSource));
+            EnumSet.allOf(InvoiceOperationType.class).forEach(type -> type.setMessageSource(messageSource));
         }
     }
 
