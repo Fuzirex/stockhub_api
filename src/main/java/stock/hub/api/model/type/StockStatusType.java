@@ -13,24 +13,20 @@ import java.util.EnumSet;
 
 @Getter
 @AllArgsConstructor
-public enum ExceptionType {
+public enum StockStatusType {
 
-    // Not informed
-    CNPJ_NOT_INFORMED("msg.exceptions.001"),
-    PASSWORD_NOT_INFORMED("msg.exceptions.002"),
-    MANDATORY_FIELDS_NOT_INFORMED("msg.exceptions.004"),
+    AVAILABLE(1, "stock-status.available"),
+    SOLD(2, "stock-status.sold");
 
-    // Invalids
-    INVALID_USER_OR_PASSWORD("msg.exceptions.003");
-
-    // injected by MessageSourceInjector
     @Setter
     private MessageSource messageSource;
 
-    private final String messageCode;
+    private final Integer id;
+    private final String translationCode;
 
-    ExceptionType(final String messageCode) {
-        this.messageCode = messageCode;
+    StockStatusType(final Integer id, final String translationCode) {
+        this.id = id;
+        this.translationCode = translationCode;
     }
 
     @Component
@@ -50,7 +46,14 @@ public enum ExceptionType {
     }
 
     public String getMessage() {
-        return messageSource.getMessage(getMessageCode(), null, LocaleContextHolder.getLocale());
+        return messageSource.getMessage(getTranslationCode(), null, LocaleContextHolder.getLocale());
+    }
+
+    public static StockStatusType getStockStatusType(Integer id) {
+        for (StockStatusType type : EnumSet.allOf(StockStatusType.class))
+            if (type.getId().equals(id)) return type;
+
+        throw new EnumConstantNotPresentException(StockStatusType.class, "Invalid Stock Status Type, id: " + id);
     }
 
 }

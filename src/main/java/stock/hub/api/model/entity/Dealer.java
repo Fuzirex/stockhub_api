@@ -8,8 +8,8 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import stock.hub.api.model.entity.auditable.Auditable;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -20,7 +20,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "DEALER")
-public class Dealer implements UserDetails {
+public class Dealer extends Auditable implements UserDetails {
 
     @Id
     @Column(name = "CNPJ", length = 14, nullable = false)
@@ -67,12 +67,6 @@ public class Dealer implements UserDetails {
 
     @Column(name = "PASSWORD", length = 255, nullable = false)
     private String password;
-
-    @Column(name = "AUDIT_CREATION_DATE", nullable = false)
-    private LocalDateTime auditCreationDate;
-
-    @Column(name = "AUDIT_LAST_UPDATE_DATE", nullable = false)
-    private LocalDateTime auditLastUpdateDate;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
