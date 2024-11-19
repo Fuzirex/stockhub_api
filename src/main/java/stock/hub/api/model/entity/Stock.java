@@ -6,6 +6,8 @@ import stock.hub.api.model.converter.StockStatusTypeConverter;
 import stock.hub.api.model.entity.auditable.Auditable;
 import stock.hub.api.model.type.StockStatusType;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,7 +15,7 @@ import stock.hub.api.model.type.StockStatusType;
 @Builder
 @Entity
 @Table(name = "STOCK")
-public class Stock extends Auditable {
+public class Stock extends Auditable implements Serializable {
 
     @Id
     @Column(name = "CHASSIS_NUMBER", length = 20, nullable = false)

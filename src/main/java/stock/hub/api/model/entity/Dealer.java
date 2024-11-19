@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import stock.hub.api.model.entity.auditable.Auditable;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
@@ -20,7 +21,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "DEALER")
-public class Dealer extends Auditable implements UserDetails {
+public class Dealer extends Auditable implements UserDetails, Serializable {
 
     @Id
     @Column(name = "CNPJ", length = 14, nullable = false)
