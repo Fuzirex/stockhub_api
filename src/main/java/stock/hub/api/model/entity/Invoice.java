@@ -53,11 +53,20 @@ public class Invoice extends Auditable implements Serializable {
     @Column(name = "CUSTOMER_COUNTRY", length = 100)
     private String customerCountry;
 
+    @Column(name = "CUSTOMER_COUNTRY_ID")
+    private Long customerCountryID;
+
     @Column(name = "CUSTOMER_STATE", length = 100)
     private String customerState;
 
+    @Column(name = "CUSTOMER_STATE_ID")
+    private Long customerStateID;
+
     @Column(name = "CUSTOMER_CITY", length = 100)
     private String customerCity;
+
+    @Column(name = "CUSTOMER_CITY_ID")
+    private Long customerCityID;
 
     @OneToMany(mappedBy = "pk.invoice", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Item> items;
