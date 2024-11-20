@@ -18,7 +18,7 @@ public class StockController extends BaseController {
     private final StockService stockService;
 
     @LogExecutionTime
-    @PostMapping
+    @PostMapping("/filter")
     public ResponseEntity<Page<StockResponseDTO>> getDealerStock(@RequestBody @Valid StockRequestDTO dto) {
         return ok(stockService.findDealerStock(dto));
     }

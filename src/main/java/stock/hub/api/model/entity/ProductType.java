@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
+import stock.hub.api.model.entity.auditable.Auditable;
+
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -13,7 +16,7 @@ import lombok.*;
 @Builder
 @Entity
 @Table(name = "PRODUCT_TYPE")
-public class ProductType {
+public class ProductType implements Serializable {
 
     @Id
     @Column(name = "TYPE", length = 3, nullable = false)

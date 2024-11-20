@@ -13,10 +13,11 @@ import java.util.EnumSet;
 
 @Getter
 @AllArgsConstructor
-public enum StockStatusType {
+public enum InvoiceOperationType {
 
-    AVAILABLE(1, "stock-status.available"),
-    SOLD(2, "stock-status.sold");
+    SALE(1, "invoice-operation-type.sale"),
+    RETURN(2, "invoice-operation-type.return"),
+    TRANSFER(3, "invoice-operation-type.transfer");
 
     @Setter
     private MessageSource messageSource;
@@ -24,7 +25,7 @@ public enum StockStatusType {
     private final Integer id;
     private final String translationCode;
 
-    StockStatusType(final Integer id, final String translationCode) {
+    InvoiceOperationType(final Integer id, final String translationCode) {
         this.id = id;
         this.translationCode = translationCode;
     }
@@ -41,7 +42,7 @@ public enum StockStatusType {
 
         @PostConstruct
         public void postConstruct() {
-            EnumSet.allOf(StockStatusType.class).forEach(type -> type.setMessageSource(messageSource));
+            EnumSet.allOf(InvoiceOperationType.class).forEach(type -> type.setMessageSource(messageSource));
         }
     }
 
@@ -49,11 +50,11 @@ public enum StockStatusType {
         return messageSource.getMessage(getTranslationCode(), null, LocaleContextHolder.getLocale());
     }
 
-    public static StockStatusType getStockStatusType(Integer id) {
-        for (StockStatusType type : EnumSet.allOf(StockStatusType.class))
+    public static InvoiceOperationType getInvoiceOperationType(Integer id) {
+        for (InvoiceOperationType type : EnumSet.allOf(InvoiceOperationType.class))
             if (type.getId().equals(id)) return type;
 
-        throw new EnumConstantNotPresentException(StockStatusType.class, "Invalid Stock Status Type, id: " + id);
+        throw new EnumConstantNotPresentException(InvoiceOperationType.class, "Invalid Invoice Operation Type, id: " + id);
     }
 
 }
