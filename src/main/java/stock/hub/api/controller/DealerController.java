@@ -16,6 +16,8 @@ import stock.hub.api.model.type.ExceptionType;
 import stock.hub.api.service.DealerService;
 import stock.hub.api.service.TokenService;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/dealer")
@@ -27,6 +29,12 @@ public class DealerController extends BaseController {
     @GetMapping("/{cnpj}")
     public ResponseEntity<DealerResponseDTO> getDealerByCNPJ(@PathVariable String cnpj) {
         return ok(dealerService.getDealerByCNPJ(cnpj));
+    }
+
+    @LogExecutionTime
+    @GetMapping("/to-transfer")
+    public ResponseEntity<List<DealerResponseDTO>> getDealersToTransfer() {
+        return ok(dealerService.getDealersToTransfer());
     }
 
 }

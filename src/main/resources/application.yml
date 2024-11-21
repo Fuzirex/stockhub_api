@@ -27,3 +27,10 @@ app:
   auth:
     token-secret: DIWjjn8kcg1tdn9aEjGglY4IfnJ9kLkFgaFu8DFEIPGbMbv8hehjqlD-j6mO2FGksB0Phnmo7Bz7clFcfvYuVw
     issuer: StockHub API
+
+  location:
+    base-url: https://servicodados.ibge.gov.br/api/v1/localidades
+    paths:
+      getCountries: /paises?view=nivelado&orderBy=nome
+      getStates: /estados?view=nivelado&orderBy=nome
+      getCities: /estados/{state}/municipios?view=nivelado&orderBy=nome
