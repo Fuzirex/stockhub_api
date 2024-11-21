@@ -31,7 +31,7 @@ jobs:
       run: chmod +x gradlew
 
     - name: Build with Gradle Wrapper
-      run: ./gradlew build
+      run: ./gradlew build -Dspring.profiles.active=test
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
