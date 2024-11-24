@@ -37,11 +37,14 @@ public class WorkbookProcessorUtils {
                 Row row = sheet.createRow(rowIndex);
                 int columnIndex = 0;
 
+                // Dealer
                 applyCellValue(row, columnIndex++, dto.getDealerCNPJ(), cellStyle);
                 applyCellValue(row, columnIndex++, dto.getDealerName(), cellStyle);
                 applyCellValue(row, columnIndex++, dto.getDealerCountry(), cellStyle);
                 applyCellValue(row, columnIndex++, dto.getDealerState(), cellStyle);
                 applyCellValue(row, columnIndex++, dto.getDealerCity(), cellStyle);
+
+                // Product
                 applyCellValue(row, columnIndex++, dto.getProductType(), cellStyle);
                 applyCellValue(row, columnIndex++, dto.getProductChassisNumber(), cellStyle);
                 applyCellValue(row, columnIndex++, dto.getProductCommercialSeries(), cellStyle);
@@ -53,7 +56,7 @@ public class WorkbookProcessorUtils {
         }
     }
 
-    /*public void populateInvoiceHistoryWorkbook(SXSSFWorkbook workbook, List<BaseReportDTO> invoiceHistoryReportList) {
+    public void populateInvoiceHistoryWorkbook(SXSSFWorkbook workbook, List<BaseReportDTO> invoiceHistoryReportList) {
         if (CollectionUtils.isNotEmpty(invoiceHistoryReportList)) {
             int rowIndex = DEFAULT_ROW_INDEX;
             Sheet sheet = getFirstSheet(workbook);
@@ -63,12 +66,41 @@ public class WorkbookProcessorUtils {
                 Row row = sheet.createRow(rowIndex);
                 int columnIndex = 0;
 
-                applyCellValue(row, columnIndex++, dto.getDealerLegalNumber(), cellStyle);
+                // Dealer
+                applyCellValue(row, columnIndex++, dto.getDealerCNPJ(), cellStyle);
+                applyCellValue(row, columnIndex++, dto.getDealerName(), cellStyle);
+                applyCellValue(row, columnIndex++, dto.getDealerCountry(), cellStyle);
+                applyCellValue(row, columnIndex++, dto.getDealerState(), cellStyle);
+                applyCellValue(row, columnIndex++, dto.getDealerCity(), cellStyle);
+
+                // Invoice
+                applyCellValue(row, columnIndex++, dto.getInvoiceNumber(), cellStyle);
+                applyCellValue(row, columnIndex++, dto.getInvoiceSeries(), cellStyle);
+                applyCellValue(row, columnIndex++, dto.getInvoiceOperationType().getMessage(), cellStyle);
+                applyCellValue(row, columnIndex++, formatDate(dto.getInvoiceEmissionDate()), cellStyle);
+                applyCellValue(row, columnIndex++, formatCurrency(dto.getInvoiceValue(), dto.getInvoiceCurrency()), cellStyle);
+
+                // Customer/Receiver
+                applyCellValue(row, columnIndex++, Objects.nonNull(dto.getInvoiceCustomerDocumentType()) ? dto.getInvoiceCustomerDocumentType().name() : null, cellStyle);
+                applyCellValue(row, columnIndex++, dto.getInvoiceCustomerLegalNumber(), cellStyle);
+                applyCellValue(row, columnIndex++, dto.getInvoiceCustomerName(), cellStyle);
+                applyCellValue(row, columnIndex++, dto.getInvoiceCustomerCountry(), cellStyle);
+                applyCellValue(row, columnIndex++, dto.getInvoiceCustomerState(), cellStyle);
+                applyCellValue(row, columnIndex++, dto.getInvoiceCustomerCity(), cellStyle);
+                applyCellValue(row, columnIndex++, dto.getInvoiceCustomerAddress(), cellStyle);
+                applyCellValue(row, columnIndex++, dto.getInvoiceCustomerAddressComplement(), cellStyle);
+
+                // Product
+                applyCellValue(row, columnIndex++, dto.getProductType(), cellStyle);
+                applyCellValue(row, columnIndex++, dto.getProductChassisNumber(), cellStyle);
+                applyCellValue(row, columnIndex++, dto.getProductCommercialSeries(), cellStyle);
+                applyCellValue(row, columnIndex++, dto.getProductModel(), cellStyle);
+                applyCellValue(row, columnIndex++, dto.getProductItemCode(), cellStyle);
 
                 rowIndex++;
             }
         }
-    }*/
+    }
 
     private Sheet getFirstSheet(SXSSFWorkbook workbook) {
         return workbook.getSheetAt(0);

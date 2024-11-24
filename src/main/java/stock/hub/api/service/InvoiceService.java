@@ -1,12 +1,15 @@
 package stock.hub.api.service;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import stock.hub.api.model.dto.report.BaseReportDTO;
 import stock.hub.api.model.dto.request.InvoiceHistoryRequestDTO;
+import stock.hub.api.model.dto.request.ReportInvoiceHistoryRequestDTO;
 import stock.hub.api.model.dto.response.InvoiceHistoryResponseDTO;
 import stock.hub.api.model.dto.response.InvoiceOperationTypeResponseDTO;
 import stock.hub.api.model.type.InvoiceOperationType;
@@ -21,6 +24,7 @@ import java.util.Objects;
 public class InvoiceService {
 
     private final ItemRepository itemRepository;
+    private final DealerService dealerService;
 
     public Page<InvoiceHistoryResponseDTO> findInvoiceHistory(InvoiceHistoryRequestDTO dto) {
         return itemRepository.findInvoiceHistoryByFilter(
@@ -39,5 +43,18 @@ public class InvoiceService {
 
     public List<InvoiceOperationTypeResponseDTO> getInvoiceOperationTypes() {
         return EnumSet.allOf(InvoiceOperationType.class).stream().map(InvoiceOperationTypeResponseDTO::new).toList();
+    }
+
+    public List<BaseReportDTO> findInvoiceHistoryReport(@Valid ReportInvoiceHistoryRequestDTO dto) {
+        return itemRepository.findInvoiceHistoryReport(
+                dto.getDealerCNPJ(),
+                dto.getEmissionPeriod(),
+                StringUtils.defaultIfBlank(dto.getInvoiceNumber(), null),
+                StringUtils.defaultIfBlank(dto.getProductType(), null),
+                StringUtils.defaultIfBlank(dto.getProductModel(), null),
+                StringUtils.defaultIfBlank(dto.getItemCode(), null),
+                StringUtils.defaultIfBlank(dto.getCommercialSeries(), null),
+                StringUtils.defaultIfBlank(dto.getChassisNumber(), null),
+                Objects.nonNull(dto.getOperationType()) ? InvoiceOperationType.getInvoiceOperationType(dto.getOperationType()) : null);
     }
 }

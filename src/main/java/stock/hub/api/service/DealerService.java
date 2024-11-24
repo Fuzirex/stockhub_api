@@ -35,4 +35,8 @@ public class DealerService {
     public boolean existsByCNPJ(String cnpj) {
         return dealerRepository.existsById(cnpj);
     }
+
+    public List<Dealer> getDealersByCNPJList(List<String> cnpjList) {
+        return dealerRepository.findAllById(cnpjList);
+    }
 }
