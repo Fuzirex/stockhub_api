@@ -102,7 +102,7 @@ public class InvoiceEntryService {
         if (dto.getOperationType() == InvoiceOperationType.TRANSFER)
             validateAndPopulateDealerToTransferForInvoiceEntryInfo(dto, invoice);
 
-        if (dto.getOperationType() == InvoiceOperationType.TRANSFER)
+        if (dto.getOperationType() == InvoiceOperationType.RETURN)
             validateAndPopulateCustomerReturnInvoiceEntryInfo(dto, invoice);
 
         Invoice finalInvoice = invoice;
