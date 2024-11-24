@@ -1,5 +1,6 @@
 package stock.hub.api.service;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Example;
@@ -7,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import stock.hub.api.model.dto.report.BaseReportDTO;
+import stock.hub.api.model.dto.request.ReportStockRequestDTO;
 import stock.hub.api.model.dto.request.StockRequestDTO;
 import stock.hub.api.model.dto.response.StockResponseDTO;
 import stock.hub.api.model.entity.Dealer;
@@ -43,5 +46,9 @@ public class StockService {
 
     public List<Stock> saveStockList(List<Stock> stockList) {
         return stockRepository.saveAll(stockList);
+    }
+
+    public List<BaseReportDTO> findStockReport(ReportStockRequestDTO dto) {
+        return stockRepository.findStockReport(dto.getDealerCNPJ(), dto.getProductType(), dto.getModel(), dto.getItemCode(), dto.getCommercialSeries(), dto.getChassisNumber());
     }
 }
