@@ -18,9 +18,13 @@ public class DealerService {
 
     private final DealerRepository dealerRepository;
 
-    public DealerResponseDTO getDealerByCNPJ(String cnpj) {
+    public DealerResponseDTO getDealerDTOByCNPJ(String cnpj) {
         Optional<Dealer> dealerOpt = dealerRepository.findById(cnpj);
         return dealerOpt.map(DealerResponseDTO::new).orElse(null);
+    }
+
+    public Dealer getDealerByCNPJ(String cnpj) {
+        return dealerRepository.findById(cnpj).orElse(null);
     }
 
     public List<DealerResponseDTO> getDealersToTransfer() {

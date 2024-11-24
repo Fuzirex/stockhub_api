@@ -2,11 +2,13 @@ package stock.hub.api.model.entity.pk;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.apache.commons.lang3.StringUtils;
 import stock.hub.api.model.converter.InvoiceOperationTypeConverter;
 import stock.hub.api.model.entity.Dealer;
 import stock.hub.api.model.type.InvoiceOperationType;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -30,4 +32,20 @@ public class InvoicePK implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Dealer dealer;
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        InvoicePK itemToCompare = (InvoicePK) obj;
+        return StringUtils.equals(this.number, itemToCompare.number)
+                && StringUtils.equals(this.series, itemToCompare.series)
+                && this.operationType == itemToCompare.operationType
+                && StringUtils.equals(this.dealer.getCnpj(), itemToCompare.dealer.getCnpj());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number, series, operationType, dealer);
+    }
 }

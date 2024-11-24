@@ -6,9 +6,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import stock.hub.api.configuration.logs.LogExecutionTime;
+import stock.hub.api.model.dto.request.InvoiceEntryRequestDTO;
 import stock.hub.api.model.dto.request.InvoiceHistoryRequestDTO;
 import stock.hub.api.model.dto.response.InvoiceHistoryResponseDTO;
 import stock.hub.api.model.dto.response.InvoiceOperationTypeResponseDTO;
+import stock.hub.api.service.InvoiceEntryService;
 import stock.hub.api.service.InvoiceService;
 
 import java.util.List;
@@ -19,6 +21,14 @@ import java.util.List;
 public class InvoiceController extends BaseController {
 
     private final InvoiceService invoiceService;
+    private final InvoiceEntryService invoiceEntryService;
+
+    @LogExecutionTime
+    @PostMapping("/entry")
+    public ResponseEntity postInvoiceEntry(@RequestBody @Valid InvoiceEntryRequestDTO dto) {
+        invoiceEntryService.processInvoiceEntry(dto);
+        return ok();
+    }
 
     @LogExecutionTime
     @PostMapping("/history")

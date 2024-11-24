@@ -21,4 +21,7 @@ public class Item extends Auditable implements Serializable {
     @EmbeddedId
     private ItemPK pk;
 
+    public Item(Invoice invoice, Stock stock) {
+        this.pk = new ItemPK(invoice, stock);
+    }
 }

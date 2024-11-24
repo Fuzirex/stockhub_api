@@ -11,6 +11,7 @@ import stock.hub.api.model.entity.pk.ItemPK;
 import stock.hub.api.model.type.InvoiceOperationType;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, ItemPK> {
@@ -45,5 +46,21 @@ public interface ItemRepository extends JpaRepository<Item, ItemPK> {
                                                                String productType, String productModel, String longItemCode,
                                                                String commercialSeries, String chassisNumber,
                                                                InvoiceOperationType operationType, Pageable pageable);
+
+    @Query("""
+            from Item ii
+            where ii.pk.invoice.pk.dealer.cnpj = :dealerCNPJ
+            and ii.pk.stock.chassisNumber in :chassisNumberList
+            and ii.pk.invoice.pk.operationType = stock.hub.api.model.type.InvoiceOperationType.SALE
+            order by ii.pk.invoice.emissionDate desc
+            """)
+    List<Item> findLastSalesInvoicesByDealerAndChassisList(String dealerCNPJ, List<String> chassisNumberList);
+
+    @Query("""
+            from Item ii
+            where ii.pk.stock.chassisNumber = :chassisNumber
+            order by ii.pk.invoice.emissionDate desc
+            """)
+    List<Item> findAllInvoiceItemByChassisNumberOrderByEmissionDateDesc(String chassisNumber);
 
 }

@@ -15,6 +15,8 @@ public class CityResponseDTO {
     private Long code;
     @JsonAlias("municipio-nome")
     private String description;
+    @JsonAlias("UF-id")
+    private String stateID;
 
     @Override
     @SneakyThrows
