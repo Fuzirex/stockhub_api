@@ -34,3 +34,6 @@ app:
       getCountries: /paises?view=nivelado&orderBy=nome
       getStates: /estados?view=nivelado&orderBy=nome
       getCities: /estados/{state}/municipios?view=nivelado&orderBy=nome
+      getCountryByID: /paises/{id}?view=nivelado&orderBy=nome
+      getStateByID: /estados/{id}?view=nivelado&orderBy=nome
+      getCityByID: /municipios/{id}?view=nivelado&orderBy=nome

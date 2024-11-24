@@ -68,7 +68,13 @@ public class Invoice extends Auditable implements Serializable {
     @Column(name = "CUSTOMER_CITY_ID")
     private Long customerCityID;
 
-    @OneToMany(mappedBy = "pk.invoice", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "CUSTOMER_ADDRESS", length = 255)
+    private String customerAddress;
+
+    @Column(name = "CUSTOMER_ADDRESS_COMPLEMENT", length = 255)
+    private String customerAddressComplement;
+
+    @OneToMany(mappedBy = "pk.invoice", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Item> items;
 
 }
