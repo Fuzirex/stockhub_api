@@ -11,6 +11,15 @@ java {
 	sourceCompatibility = '21'
 }
 
+bootJar {
+	launchScript()
+	archiveFileName = "stockhub.jar"
+}
+
+jar {
+	enabled = false
+}
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
