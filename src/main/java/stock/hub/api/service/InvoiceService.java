@@ -24,7 +24,6 @@ import java.util.Objects;
 public class InvoiceService {
 
     private final ItemRepository itemRepository;
-    private final DealerService dealerService;
 
     public Page<InvoiceHistoryResponseDTO> findInvoiceHistory(InvoiceHistoryRequestDTO dto) {
         return itemRepository.findInvoiceHistoryByFilter(
@@ -36,7 +35,7 @@ public class InvoiceService {
                 StringUtils.defaultIfBlank(dto.getItemCode(), null),
                 StringUtils.defaultIfBlank(dto.getCommercialSeries(), null),
                 StringUtils.defaultIfBlank(dto.getChassisNumber(), null),
-                Objects.nonNull(dto.getOperationType()) ? InvoiceOperationType.getInvoiceOperationType(dto.getOperationType()) : null,
+                Objects.nonNull(dto.getOperationType()) ? dto.getOperationType() : null,
                 PageRequest.of(dto.getPage(), dto.getSize(),
                         Sort.by(Sort.Direction.DESC, "pk.invoice.emissionDate")));
     }
@@ -55,6 +54,6 @@ public class InvoiceService {
                 StringUtils.defaultIfBlank(dto.getItemCode(), null),
                 StringUtils.defaultIfBlank(dto.getCommercialSeries(), null),
                 StringUtils.defaultIfBlank(dto.getChassisNumber(), null),
-                Objects.nonNull(dto.getOperationType()) ? InvoiceOperationType.getInvoiceOperationType(dto.getOperationType()) : null);
+                Objects.nonNull(dto.getOperationType()) ? dto.getOperationType() : null);
     }
 }

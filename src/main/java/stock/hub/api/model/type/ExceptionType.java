@@ -36,6 +36,7 @@ public enum ExceptionType {
     CUSTOMER_STATE_NOT_FOUND("msg.exceptions.016"),
     CUSTOMER_CITY_NOT_FOUND("msg.exceptions.017"),
     LAST_SALE_INVOICE_NOT_FOUND("msg.exceptions.018"),
+    INVOICE_NOT_FOUND("msg.exceptions.022"),
 
     // Others
     EMISSION_DATE_AFTER_NOW("msg.exceptions.010"),

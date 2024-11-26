@@ -28,4 +28,8 @@ public class ItemPK implements Serializable {
     @JoinColumn(name = "CHASSIS_NUMBER", referencedColumnName = "CHASSIS_NUMBER")
     private Stock stock;
 
+    public ItemPK(Invoice invoice) {
+        this.invoice = invoice;
+    }
+
 }

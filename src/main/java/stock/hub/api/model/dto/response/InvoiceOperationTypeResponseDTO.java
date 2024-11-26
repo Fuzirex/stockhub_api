@@ -10,11 +10,11 @@ import stock.hub.api.model.type.InvoiceOperationType;
 @Builder
 public class InvoiceOperationTypeResponseDTO {
 
-    private Integer id;
+    private InvoiceOperationType operation;
     private String description;
 
     public InvoiceOperationTypeResponseDTO(InvoiceOperationType type) {
-        this.id = type.getId();
+        this.operation = type;
         this.description = type.getMessage();
     }
 }
