@@ -121,4 +121,14 @@ public interface ItemRepository extends JpaRepository<Item, ItemPK> {
             """)
     Item findItemByPK(String chassisNumber, String dealerCNPJ, String invoiceNumber, String invoiceSeries, InvoiceOperationType operationType);
 
+    @Query("""
+            select ii
+            from Item ii
+            where ii.pk.invoice.pk.dealer.cnpj = :dealerCNPJ
+            and ii.pk.invoice.pk.number = :invoiceNumber
+            and ii.pk.invoice.pk.series = :invoiceSeries
+            and ii.pk.invoice.pk.operationType = :operationType
+            """)
+    List<Item> findItemsByInvoice(String dealerCNPJ, String invoiceNumber, String invoiceSeries, InvoiceOperationType operationType);
+
 }

@@ -2,6 +2,7 @@ package stock.hub.api.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 import stock.hub.api.model.dto.request.UndoInvoiceRequestDTO;
 import stock.hub.api.model.entity.Invoice;
@@ -40,7 +41,7 @@ public class UndoInvoiceService {
 
         itemRepository.delete(item);
 
-        if (!itemRepository.existsById(new ItemPK(invoice)))
+        if (CollectionUtils.isEmpty(itemRepository.findItemsByInvoice(invoice.getPk().getDealer().getCnpj(), invoice.getPk().getNumber(), invoice.getPk().getSeries(), invoice.getPk().getOperationType())))
             invoiceRepository.delete(invoice);
     }
 
