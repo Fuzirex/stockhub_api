@@ -18,7 +18,7 @@ public class InvoiceHistoryResponseDTO {
     private String dealerCNPJ;
     private String invoiceNumber;
     private String invoiceSeries;
-    private Integer operationType;
+    private InvoiceOperationType operationType;
     private String operationTypeDescription;
     private LocalDateTime emissionDate;
 
@@ -36,7 +36,7 @@ public class InvoiceHistoryResponseDTO {
         this.dealerCNPJ = dealerCNPJ;
         this.invoiceNumber = invoiceNumber;
         this.invoiceSeries = invoiceSeries;
-        this.operationType = operationType.getId();
+        this.operationType = operationType;
         this.operationTypeDescription = operationType.getMessage();
         this.emissionDate = emissionDate;
         this.chassisNumber = chassisNumber;

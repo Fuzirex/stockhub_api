@@ -77,4 +77,7 @@ public class Invoice extends Auditable implements Serializable {
     @OneToMany(mappedBy = "pk.invoice", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Item> items;
 
+    public Invoice(InvoicePK pk) {
+        this.pk = pk;
+    }
 }

@@ -6,25 +6,26 @@ import lombok.*;
 import stock.hub.api.model.type.InvoiceOperationType;
 import stock.hub.api.util.ObjectMapperUtils;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReportInvoiceHistoryRequestDTO {
+public class UndoInvoiceRequestDTO {
 
-    @NotBlank(message = "{msg.exceptions.001}")
+    @NotBlank(message = "{msg.exceptions.004}")
     private String dealerCNPJ;
+
+    @NotBlank(message = "{msg.exceptions.004}")
     private String invoiceNumber;
-    private InvoiceOperationType operationType;
+
+    @NotBlank(message = "{msg.exceptions.004}")
+    private String invoiceSeries;
+
     @NotNull(message = "{msg.exceptions.004}")
-    private LocalDateTime emissionPeriod;
-    private String productType;
-    private String productModel;
-    private String itemCode;
-    private String commercialSeries;
+    private InvoiceOperationType operationType;
+
+    @NotBlank(message = "{msg.exceptions.004}")
     private String chassisNumber;
 
     @Override
