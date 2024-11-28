@@ -37,7 +37,8 @@ public class InvoiceService {
                 StringUtils.defaultIfBlank(dto.getChassisNumber(), null),
                 Objects.nonNull(dto.getOperationType()) ? dto.getOperationType() : null,
                 PageRequest.of(dto.getPage(), dto.getSize(),
-                        Sort.by(Sort.Direction.DESC, "pk.invoice.emissionDate")));
+                        Sort.by(Sort.Direction.DESC, "pk.invoice.emissionDate")
+                                .and(Sort.by(Sort.Direction.DESC, "pk.invoice.auditCreationDate"))));
     }
 
     public List<InvoiceOperationTypeResponseDTO> getInvoiceOperationTypes() {
