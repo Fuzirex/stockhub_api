@@ -33,7 +33,7 @@ public class Invoice extends Auditable implements Serializable {
     @Enumerated(EnumType.STRING)
     private CurrencyType currency;
 
-    @Column(name = "VALUE", precision = 14, scale = 2)
+    @Column(name = "INVOICE_VALUE", precision = 14, scale = 2)
     private BigDecimal value;
 
     @JoinColumn(name = "DEALER_TO_TRANSFER", referencedColumnName = "CNPJ")

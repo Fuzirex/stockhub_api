@@ -5,8 +5,8 @@ create table ITEM
     SERIES                 varchar(15) not null,
     OPERATION_TYPE         int         not null,
     DEALER                 varchar(14) not null,
-    AUDIT_CREATION_DATE    datetime    not null,
-    AUDIT_LAST_UPDATE_DATE datetime    not null,
+    AUDIT_CREATION_DATE    timestamp   not null,
+    AUDIT_LAST_UPDATE_DATE timestamp   not null,
 
     constraint PK_ITEM
         primary key (CHASSIS_NUMBER, NUMBER, SERIES, OPERATION_TYPE, DEALER),

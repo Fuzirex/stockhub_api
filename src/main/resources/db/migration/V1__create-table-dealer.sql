@@ -15,8 +15,8 @@ create table DEALER
     NUMBER                 bigint       null,
     ACTIVE                 tinyint      not null,
     PASSWORD               varchar(255) not null,
-    AUDIT_CREATION_DATE    datetime     not null,
-    AUDIT_LAST_UPDATE_DATE datetime     not null,
+    AUDIT_CREATION_DATE    timestamp    not null,
+    AUDIT_LAST_UPDATE_DATE timestamp    not null,
 
     constraint PK_DEALER
         primary key (CNPJ)

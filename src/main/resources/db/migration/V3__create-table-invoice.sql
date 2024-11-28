@@ -5,7 +5,7 @@ create table INVOICE
     OPERATION_TYPE         int            not null,
     DEALER                 varchar(14)    not null,
     EMISSION_DATE          date           not null,
-    VALUE                  decimal(14, 2) null,
+    INVOICE_VALUE          decimal(14, 2) null,
     DEALER_TO_TRANSFER     varchar(14)    null,
     CUSTOMER_DOCUMENT_TYPE varchar(10)    null,
     CUSTOMER_LEGAL_NUMBER  varchar(20)    null,
@@ -13,8 +13,8 @@ create table INVOICE
     CUSTOMER_COUNTRY       varchar(100)   null,
     CUSTOMER_STATE         varchar(100)   null,
     CUSTOMER_CITY          varchar(100)   null,
-    AUDIT_CREATION_DATE    datetime       not null,
-    AUDIT_LAST_UPDATE_DATE datetime       not null,
+    AUDIT_CREATION_DATE    timestamp      not null,
+    AUDIT_LAST_UPDATE_DATE timestamp      not null,
 
     constraint PK_INVOICE
         primary key (NUMBER, SERIES, OPERATION_TYPE, DEALER),
