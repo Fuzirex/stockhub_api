@@ -6,8 +6,8 @@ create table STOCK
     ITEM_CODE              varchar(20) not null,
     DEALER                 varchar(14) not null,
     STATUS                 int         not null,
-    AUDIT_CREATION_DATE    datetime    not null,
-    AUDIT_LAST_UPDATE_DATE datetime    not null,
+    AUDIT_CREATION_DATE    timestamp   not null,
+    AUDIT_LAST_UPDATE_DATE timestamp   not null,
 
     constraint PK_STOCK
         primary key (CHASSIS_NUMBER),

@@ -104,4 +104,7 @@ public class Dealer extends Auditable implements UserDetails, Serializable {
         return active;
     }
 
+    public Dealer(String cnpj) {
+        this.cnpj = cnpj;
+    }
 }
