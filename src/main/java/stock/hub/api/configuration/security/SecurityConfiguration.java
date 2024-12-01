@@ -25,9 +25,6 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-    @Value("${app.auth.token-secret}")
-    private String tokenSecret;
-
     @Value("#{'${app.security.cors.headers:}'.split(',')}")
     private List<String> allowedHeaders;
     @Value("#{'${app.security.cors.methods:}'.split(',')}")
